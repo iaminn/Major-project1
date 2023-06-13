@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <!-- Title of the document -->
+  <title>Validation Form</title>
+  <!-- Usage of bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
+  <!-- CSS code to give littl style to the form(colors,margin,padding,font-size etc) -->
+  
+  <style> 
+    body{
+      background-color: lightgrey;
+    }
+    
+   .container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 5px;
+      font-size: 5rem;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      text-shadow: 15px;
+    }
+    .sub-headings{
+      margin-left: 300px;
+      margin-right: 300px;
+      font-size: large;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .button{
+      text-align: center;
+      border-radius: 50%;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+<!-- HTML code to write the content of the form -->
+ 
+</head>
+  
+  <body>
+  <div class="container mt-4">
+    <h2>Registration Form</h2>
+  </div> 
+    <div class="sub-headings">
+    <form name="myForm" onsubmit="return validateForm()" method="post">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" name="name" id="name">
+        <small class="error" id="nameError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" class="form-control" name="dob" id="dob">
+        <small class="error" id="dobError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email">
+        <small class="error" id="emailError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" class="form-control" name="phone" id="phone">
+        <small class="error" id="phoneError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password">
+        <small class="error" id="passwordError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+        <small class="error" id="confirmPasswordError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="course">Course:</label>
+        <select class="form-control" name="course" id="course">
+          <option value="">Select a course</option>
+          <option value="course1">Full Stack Web Development</option>
+          <option value="course2">Artificial Intelligence</option>
+          <option value="course3">Machine Learning</option>
+          <option value="course4">Ethical Hacking</option>
+        </select>
+        <small class="error" id="courseError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea class="form-control" name="address" id="address"></textarea>
+        <small class="error" id="addressError"></small>
+      </div>
+      <div class="button">
+      <button type="submit" class="btn btn-secondary">Register</button>
+      </div>    
+    </form>
+  </div>
+   <!-- Java Script code to give the functionality -->
+   
+   <script>
+   
+   function validateForm() {
+      var name = document.forms["myForm"]["name"].value;
+      var dob = document.forms["myForm"]["dob"].value;
+      var email = document.forms["myForm"]["email"].value;
+      var phone = document.forms["myForm"]["phone"].value;
+      var password = document.forms["myForm"]["password"].value;
+      var confirmPassword = document.forms["myForm"]["confirmPassword"].value;
+      var course = document.forms["myForm"]["course"].value;
+      var address = document.forms["myForm"]["address"].value;
+
+      var isValid = true;
+      // If Condition to not leave the name field empty and to give 
+      // atleast 5 characters
+
+      if (name === "")
+       {
+        document.getElementById("nameError").innerText = "Please enter your name.";
+        isValid = false;
+       } 
+         else if (name.length < 5) 
+             {
+               document.getElementById("nameError").innerText = "Name must be at least 5 characters.";
+                isValid = false;
+             } 
+             else 
+                 {
+                  document.getElementById("nameError").innerText = "";
+                 }
+            
+      //  Condition for the dateofbirth to fill it neccessarily
+
+      if (dob === "") {
+        document.getElementById("dobError").innerText = "Please enter your date of birth.";
+        isValid = false;
+      } else {
+        document.getElementById("dobError").innerText = "";
+      }
+   
+      // Condition for the email to include '@' character
+      
+      if (email === "") {
+        document.getElementById("emailError").innerText = "Please enter your email.";
+        isValid = false;
+      } else {
+        document.getElementById("emailError").innerText = "";
+      }
+
+      // Condition for the Phone number field(!=123456789)
+
+      if (phone === "") {
+        document.getElementById("phoneError").innerText = "Please enter your phone number!";
+        isValid = false;
+      } else {
+        document.getElementById("phoneError").innerText = "";
+      }
+
+      if (phone === "123456789") {
+        document.getElementById("phoneError").innerText = "Please enter a valid number!";
+        isValid = false;
+      } else {
+        document.getElementById("phoneError").innerText = "";
+      }
+
+      if (password === "") {
+        document.getElementById("passwordError").innerText = "Please enter a password!";
+        isValid = false;
+      } else {
+        document.getElementById("passwordError").innerText = "";
+      }
+
+      if (confirmPassword === "") {
+        document.getElementById("confirmPasswordError").innerText = "Please confirm your password!";
+        isValid = false;
+      } else {
+        document.getElementById("confirmPasswordError").innerText = "";
+      }
+      // Condition to enter the same passsword in password and confirm password fields
+     
+      if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").innerText = "Passwords do not match!";
+        isValid = false;
+      }
+      
+      // Condition for the course to fill it neccessarily
+      if (course === "") {
+        document.getElementById("courseError").innerText = "Please select a course!";
+        isValid = false;
+      } else {
+        document.getElementById("courseError").innerText = "";
+      }
+
+      // Condition for the address to fill it neccessarily
+       
+      if (address === "") {
+        document.getElementById("addressError").innerText = "Please enter your address!";
+        isValid = false;
+      } else {
+        document.getElementById("addressError").innerText = "";
+      }
+
+      return isValid;
+    }
+  </script>
+
+</body>
+</html>
+                <!-- End of code -->
+ <!-- I hope you will be satisfied with my project -->
